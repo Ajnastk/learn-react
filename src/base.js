@@ -1,7 +1,3 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import { jsx } from "react/jsx-runtime";
-
 // React.createElement → ReactElement-JS Object → HTMLELement (render)
 
 //// basic format of creating a react element
@@ -55,22 +51,25 @@ import { jsx } from "react/jsx-runtime";
 
 // //multiline jsx element compolsory to write parenthesis
 
-jsxheading1 = <h1 id="header">hello world from react 🚀</h1>;
+// const heading1 = <h1 id="header">hello world from react 🚀</h1>;
 
-//function component with return keyword
+// //function component with return keyword
 
-const Heading1 = () => {
-  return <h1 className="header">hello world from heading1👀</h1>;
-};
+// const Heading1 = () => {
+//   return <h1 className="header">hello world from heading1👀</h1>;
 
-//function component without return keyword
-const Heading2 = () => (
-  <div id="container">
-    <Heading1 />
-    <h1 className="header">hello word from heading2😱</h1>
-  </div>
-);
+// };
 
-const root = ReactDOM.createRoot(document.getElementById("root"));
-
-root.render(<Heading2 />);
+// //function component without return keyword
+// const Heading2 = () => (
+//   <div id="container">
+//     <Heading1 />
+//     //OR
+//     <Heading1></Heading1>
+//     //OR
+//     {Heading1()}
+//     <h1 className="header">hello word from heading2😱</h1>
+// // a element in a compononent
+//     {heading1}
+//   </div>
+// );
