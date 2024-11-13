@@ -21,7 +21,7 @@ const RestaurantCards = (props) => {
           <h4>
             <i className="fa-solid fa-star"></i>{avgRating}
           </h4>
-          <p>{cuisines}</p>
+          <p>{cuisines.join(", ")}</p>
         </div>
       </div>
     );
