@@ -4,6 +4,7 @@ import { jsx } from "react/jsx-runtime";
 
 import Headers from "./components/Headers.jsx"
 import  Body from "./components/Body.jsx";
+import Shimmer from "./components/Shimmer.jsx"
 
 
 
@@ -13,6 +14,7 @@ const Applayout = () => {
     <div className="application">
       <Headers />
       <Body />
+     
     </div>
   );
 };
