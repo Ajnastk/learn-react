@@ -1,7 +1,9 @@
 import RestaurantCards from "./RestaurantCards";
 import { useEffect, useState } from "react";
 //import resList from "../utils/mockData"
+
 import ShimmerCard from "./Shimmer";
+import { Link } from "react-router-dom";
 const Body = () => {
   const [restaurantsList, setrestaurants] = useState([]);
 
@@ -20,12 +22,12 @@ console.log("body rendered ");
 
   useEffect(() => {
     fetchData();
-  }, []);
+  },[]);
 
   const fetchData = async () => {
     try {
       const data = await fetch(
-        "https://www.swiggy.com/dapi/restaurants/list/v5?lat=11.24653&lng=75.82718229999999&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
+    "https://www.swiggy.com/dapi/restaurants/list/v5?lat=11.24653&lng=75.82718229999999&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
       );
       const json = await data.json();
 
@@ -55,10 +57,10 @@ console.log("body rendered ");
         className="btn-rate"
         onClick={() => {
           const filteredList = restaurantsList.filter(
-            (res) => res.info.avgRating >= 4.5
+            (res) => res.info.avgRating > 4.4
           );
           setHeading("Top Rated Restaurants in Kozhikode");
-          setrestaurants(filteredList);
+          setfilteredRestaurants(filteredList);
           console.log("button clicked");
         }}
       >
@@ -98,7 +100,12 @@ console.log("body rendered ");
         {/* //not using keys (not acceptable) <<<<<<< index as key <<<<<<<<<<< unique key */}
 
         {filteredRestaurants.map((restaurants) => (
-          <RestaurantCards key={restaurants.info.id} resData={restaurants} />
+         <Link className="no-style-link"
+         key={restaurants.info.id}
+          to= {"/restaurants/"+ restaurants.info.id}
+          > 
+          <RestaurantCards  resData={restaurants} />
+          </Link>
         ))}
       </div>
     </div>

@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { LOGO_URL} from "../utils/constants";
 import {useState} from "react";
+import {Link} from "react-router-dom"
 
 Headers = () => {
 
@@ -17,19 +18,18 @@ Headers = () => {
         </div>
         <ul className="h-list">
           <li>
-            {" "}
-            <a href="/" className="h">
+            <Link to="/" className="h">
               home
-            </a>
+            </Link>
           </li>
           <li>
-            <a href="#">about</a>
+            <Link to="/about">about</Link>
           </li>
           <li>
-            <a href="#">contact</a>
+            <Link to="/contact">contact</Link>
           </li>
           <li>
-            <a href="#">help</a>
+            <Link to="/help">help</Link>
           </li>
           <li><button className="login-button" onClick={()=>{  
 

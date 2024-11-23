@@ -4,9 +4,8 @@
   "description": "",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start":"parcel index.html",
-    "build":"parcel build index.html"
-
+    "start": "parcel index.html",
+    "build": "parcel build index.html"
   },
   "repository": {
     "type": "git",
@@ -24,12 +23,11 @@
   },
   "dependencies": {
     "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^6.28.0"
   },
-  
-    "browserslist": [
-      "last 2 versions",
-      "ie >= 11"
-    ]
-  
+  "browserslist": [
+    "last 2 versions",
+    "ie >= 11"
+  ]
 }
