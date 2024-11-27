@@ -1,39 +1,17 @@
-import { useEffect, useState } from "react";
+
 import Shimmer from "../components/Shimmer";
+import useResMenu from "../utils/useResMenu";
 import { useParams } from "react-router-dom";
 const ResMenu = () => {
-  const [resInfo, setResInfo] = useState(null);
 
 const {id} = useParams()
   //console.log(params);
+
+  //add a custom hook to handle fetching the menu
+  const resInfo = useResMenu(id);
   
-  
-  // Fetch the menu data when the component mounts
-  useEffect(() => {
-    fetchMenu();
-  }, []); // Empty dependency array ensures this runs only once
+if (resInfo === null) return <Shimmer />;
 
-  const fetchMenu = async () => {
-    try {
-      const response = await fetch(
-       "https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=11.24653&lng=75.82718229999999&restaurantId="+id
-      );
-
-      // Check if the response is not OK
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
-      }
-
-      const json = await response.json();
-      //console.log(json); // Log the JSON data
-
-      setResInfo(json);
-    } catch (error) {
-      console.error("Error fetching menu:", error.message); // Log the error
-    }
-  };
-
-  if (resInfo === null) return <Shimmer />;
 
   const {
     name,
@@ -43,15 +21,15 @@ const {id} = useParams()
     cuisines,
     locality,
     deliveryTime
-  } = resInfo?.data?.cards?.[2]?.card?.card?.info || {};
+  } = resInfo?.cards?.[2]?.card?.card?.info || {};
   console.log("API Response:", resInfo);
 
 
   const { carousel } =
-    resInfo?.data?.cards?.[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards?.[1]?.card?.card
+    resInfo?.cards?.[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards?.[1]?.card?.card
     console.log("topPick:", carousel);
   const { itemCards } =
-    resInfo?.data?.cards?.[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards?.[4]?.card?.card
+    resInfo?.cards?.[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards?.[4]?.card?.card
       
 
   console.log("menulist:", itemCards);
@@ -83,7 +61,7 @@ const {id} = useParams()
       <ul className="menu-info">
         {itemCards?.map((item) => (
           <li className="list-menu" key={item?.card?.info?.id}>
-            {item.card.info.name}<span>-{'\u00A0'} {"₹"}{'\u00A0'}{'\u00A0'}{item.card.info.price/100 || item.card.info.defaultPrice/100
+            {item.card.info.name}<span>-{'\u00A0'}{'\u00A0'}{'\u00A0'}{item.card.info.price/100 || item.card.info.defaultPrice/100
             }</span>
             </li>
         )

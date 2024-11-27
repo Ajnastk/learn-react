@@ -12,6 +12,7 @@ console.log("parent constructor");
     }
 
     componentDidMount(){
+
 console.log("parent componentDidMount");
 
     }
@@ -20,10 +21,9 @@ console.log("parent componentDidMount");
             <div><h1>about us page</h1>
             
            
-            <Userclass Name ={"first"}/>
-            {console.log("parent render")};
-            <Userclass Name ={"second"}/>
-            {console.log("parent render")};
+            <Userclass/>
+            {console.log("parent render")}
+           
             </div>
          
         )
@@ -33,4 +33,30 @@ console.log("parent componentDidMount");
     }
 }
 
+/****
+*
+*---
+MOUNTING ----
+*
+* Constructor (dummy)
+* Render (dummy)
+* ‹HTML Dummy >
+* Component Did MOunt
+‹API Call>
+* ‹this.setState> → State variable is updated
+*
+* ---- UPDATE
+*
+*
+render (APi data)
+*
+<HTML (new API data>)
+* 
+   componentDid Update
+*
+
+*/
+
 export default About
+
+
