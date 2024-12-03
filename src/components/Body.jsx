@@ -1,5 +1,5 @@
-import RestaurantCards from "./RestaurantCards";
-import {useEffect, useState } from "react";
+import RestaurantCards, { withOffers } from "./RestaurantCards";
+import { useEffect, useState } from "react";
 //import resList from "../utils/mockData"
 
 import ShimmerCard from "./Shimmer";
@@ -7,7 +7,6 @@ import { Link } from "react-router-dom";
 
 import useOnlineStatus from "../utils/useStatus";
 const Body = () => {
-
   const [restaurantsList, setrestaurants] = useState([]);
 
   //TO FILTER THE RESTAURANTS IN SEARCH TEXT FIELD TO CONTINUE SEARCHING WITHOUT REFRESHING THE PAGE
@@ -18,7 +17,9 @@ const Body = () => {
     "Restaurants with online food delivery in Kozhikode"
   );
 
-  //console.log("body rendered ");
+  console.log("body rendered ", restaurantsList);
+
+  const CardWithOffer = withOffers(RestaurantCards);
 
   useEffect(() => {
     fetchData();
@@ -44,11 +45,8 @@ const Body = () => {
 
   const LineStatus = useOnlineStatus();
 
-  if (LineStatus === false){
-    return(
-      <h1>Looks like you're offline , please check your internet</h1>
-    )
-   
+  if (LineStatus === false) {
+    return <h1>Looks like you're offline , please check your internet</h1>;
   }
 
   // if(restaurantsList.length === 0){
@@ -62,7 +60,7 @@ const Body = () => {
     <div className="body">
       <div className="flex justify-between mt-8">
         <button
-          className=" ml-5 mt-7 text-lg border  border-black rounded-md bg-green-800"
+          className=" ml-5 mt-7 text-lg border  border-black rounded-md bg-green-400"
           onClick={() => {
             const filteredList = restaurantsList.filter(
               (res) => res.info.avgRating > 4.4
@@ -77,7 +75,7 @@ const Body = () => {
 
         <div className="flex items-center pr-7 mt-7">
           <input
-          className="p-2 border border-green-600 rounded-s-lg"
+            className="p-2 border border-green-600 rounded-s-lg"
             type="text"
             value={searchText}
             onChange={(e) => {
@@ -85,7 +83,7 @@ const Body = () => {
             }}
           />
           <button
-          className="px-3 py-[9px] bg-green-800 rounded-e-lg hover:bg-green-400"
+            className="px-3 py-[9px] bg-green-400 rounded-e-lg hover:bg-green-100"
             type="submit"
             onClick={() => {
               console.log(searchText);
@@ -117,7 +115,11 @@ const Body = () => {
             key={restaurants.info.id}
             to={"/restaurants/" + restaurants.info.id}
           >
-            <RestaurantCards resData={restaurants} />
+            {restaurants?.info?.aggregatedDiscountInfoV3 ? (
+              <CardWithOffer resData={restaurants} />
+            ) : (
+              <RestaurantCards resData={restaurants} />
+            )}
           </Link>
         ))}
       </div>

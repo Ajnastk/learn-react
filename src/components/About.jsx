@@ -1,5 +1,7 @@
 import Userclass from  "./Userclass";
+import {Stopwatch} from "./User"
 import React  from "react";
+
 
 
 class About extends React.Component {
@@ -22,6 +24,10 @@ console.log("parent componentDidMount");
            
             <Userclass/>
             {console.log("parent render")}
+
+            <User />
+
+            <Stopwatch/>
            
             </div>
          

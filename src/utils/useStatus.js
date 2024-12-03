@@ -6,7 +6,7 @@ const useOnlineStatus = ()=>{
     const [LineStatus,setLineStatus ]= useState(true);
 
 useEffect(()=>{
-window.addEventListener("offline", ()=> {
+window.addEventListener("offline", ()=> { 
     setLineStatus(false);
 })
 window.addEventListener("online", ()=> {
