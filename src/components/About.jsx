@@ -25,7 +25,7 @@ console.log("parent componentDidMount");
             <Userclass/>
             {console.log("parent render")}
 
-            <User />
+
 
             <Stopwatch/>
            

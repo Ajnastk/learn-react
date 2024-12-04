@@ -33,7 +33,7 @@ const Body = () => {
       const json = await data.json();
 
       const fetchRestaurants =
-        json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle
+        json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle
           ?.restaurants || [];
       setrestaurants(fetchRestaurants);
       setfilteredRestaurants(fetchRestaurants);

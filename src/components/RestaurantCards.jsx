@@ -23,7 +23,7 @@ const RestaurantCards = (props) => {
           <h4 className="mt-6">
             <i className="fa-solid fa-star"></i>{avgRating}
           </h4>
-          <p className="mt-3">{cuisines.join(", ")}</p>
+          <p className="mt-3">{cuisines.join(",")}</p>
         </div>
       </div>
       </div>
@@ -40,12 +40,12 @@ export const withOffers = (RestaurantCards)=>{
     const { header, subHeader } = resData?.info?.aggregatedDiscountInfoV3 || {};
     
     return (
-      <div className="relative mt-7 bg-white shadow-md rounded-lg overflow-hidden hover:scale-105 transition-transform duration-300">
+      <div className=" relative w-[100%]  rounded-lg overflow-hidden hover:scale-105 transition-transform duration-300">
         {/* Render the offer label if header or subHeader exists */}
         {header || subHeader ? (
-          <div className="absolute top-0 left-0 z-10 bg-yellow-500 text-white text-sm font-semibold py-3 px-3 rounded-br-lg">
+          <div className="absolute top-10 left-0 z-10 bg-yellow-500 text-white text-sm font-semibold py-3 px-3 rounded-br-lg">
             <p>
-              {header} {subHeader}
+              {header}{subHeader}
             </p>
           </div>
         ) : null}
