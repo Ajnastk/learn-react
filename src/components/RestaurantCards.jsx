@@ -1,15 +1,18 @@
+import { useContext } from "react";
+import UserContext from "../utils/UserContext";
 import { CDN_URL } from "../utils/constants";
 
 const RestaurantCards = (props) => {
     //the props will be an object
   
     //const { resName,ratingTime ,cuisines} = props;
-  
+  const {loggedInUser} = useContext(UserContext)
     const {resData} = props;
     const {cloudinaryImageId,name,avgRating,cuisines} = resData?.info;
+
     
     return (
-      <div className>
+      <div>
          <div className=" w-[300px] border border-black rounded-xl mt-10 h-[500px] overflow-hidden hover:shadow-lg hover:scale-105 transition-transform duration-500">
         <div className="c-img">
           <img
@@ -24,6 +27,7 @@ const RestaurantCards = (props) => {
             <i className="fa-solid fa-star"></i>{avgRating}
           </h4>
           <p className="mt-3">{cuisines.join(",")}</p>
+          <p className="mt-3">{loggedInUser}</p>
         </div>
       </div>
       </div>
@@ -36,8 +40,8 @@ const RestaurantCards = (props) => {
 export const withOffers = (RestaurantCards)=>{
   return (props) =>{
 
-    const { resData } = props;
-    const { header, subHeader } = resData?.info?.aggregatedDiscountInfoV3 || {};
+    const {resData} = props;
+    const {header, subHeader } = resData?.info?.aggregatedDiscountInfoV3 || {};
     
     return (
       <div className=" relative w-[100%]  rounded-lg overflow-hidden hover:scale-105 transition-transform duration-300">

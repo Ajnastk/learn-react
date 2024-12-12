@@ -1,7 +1,9 @@
+import { useState } from "react";
 import Shimmer from "../components/Shimmer";
 import useResMenu from "../utils/useResMenu";
 import ResCategory from "./ResCategory";
 import { useParams } from "react-router-dom";
+
 const ResMenu = () => {
   const { id } = useParams();
   //console.log(params);
@@ -9,7 +11,12 @@ const ResMenu = () => {
   //add a custom hook to handle fetching the menu
   const resInfo = useResMenu(id);
 
+  //-----------------------------------------------
+  const [showIndex, setShowIndex] = useState(0)
+
   if (resInfo === null) return <Shimmer />;
+
+  
 
   const {
     name,
@@ -26,11 +33,14 @@ const ResMenu = () => {
     resInfo?.cards?.[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards?.[1]?.card
       ?.card;
   console.log("topPick:", carousel);
-  
-//const {itemCards} = resInfo?.cards?.[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards?.[1].card?.card
+
+  //const {itemCards} = resInfo?.cards?.[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards?.[1].card?.card
   const categories =
-    resInfo?.cards?.[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards.filter( (c)=> c.card?.card?.["@type"]=== "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory" )
-    
+    resInfo?.cards?.[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards.filter(
+      (c) =>
+        c.card?.card?.["@type"] ===
+        "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory"
+    );
 
   return (
     <div className="main">
@@ -76,12 +86,20 @@ const ResMenu = () => {
             </li>
           ))}
         </ul> */}
-         <h2 className="text-2xl font-serif  mt-6 text-center">⇢ Menu ⇠</h2>
-{categories.map((category) => (
-  <ResCategory key={category?.card?.card.title} data ={category?.card?.card}/>
-))}
+        <h2 className="text-2xl font-serif  mt-6 text-center">⇢ Menu ⇠</h2>
+        {categories.map((category,index) => (
 
-   
+          //controlled component example ----------------------------------
+          //lifting state up 
+          <ResCategory
+            key={category?.card?.card.title}
+            data={category?.card?.card}
+            showItems={index === showIndex} // Check if the current index matches
+            setShowIndex={() => {
+              setShowIndex((prevIndex) => (prevIndex === index ? -1 : index));
+            }}
+          />
+        ))}
       </div>
     </div>
   );
